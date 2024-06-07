@@ -18,7 +18,7 @@
   max-height: 20vh;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: left;
   font-size: calc(10px + 2vmin);
   color: white;
 }
@@ -39,4 +39,12 @@
 .Line {
     display: flex;
     align-items: center;
+}
+
+.Solutions {
+    max-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    font-size: calc(10px + 2vmin);
 }
