@@ -48,3 +48,10 @@
     justify-content: left;
     font-size: calc(10px + 2vmin);
 }
+
+.VarBlock {
+    display: flex;
+    align-items: center;
+    border-radius: 15px;
+    border: 1px solid lightgray;
+}
