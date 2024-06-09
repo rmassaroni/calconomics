@@ -3,9 +3,9 @@ import React, { useState } from 'react';
 
 function App() {
     const [inputs, setInputs] = useState([
-        { name: 'afc', value: 0, solved: false },
-        { name: 'tfc', value: 0, solved: false },
-        { name: 'q', value: 0, solved: false }
+        { name: 'afc', value: 0, solved: false, custom: false},
+        { name: 'tfc', value: 0, solved: false, custom: false },
+        { name: 'q', value: 0, solved: false, custom: false }
     ]);
     const handleInputChange = (index, value) => {
         const newInputs = [...inputs];
