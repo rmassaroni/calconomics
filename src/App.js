@@ -34,9 +34,9 @@ function App() {
     const calculateMinWidth = (value) => {
         const canvas = document.createElement('canvas');
         const context = canvas.getContext('2d');
-        context.font = '14px Arial'; // Set the font size and type
-        const textWidth = context.measureText(value).width; // Calculate the width of the text
-        return `${textWidth}px`; // Return the minimum width as a string
+        context.font = '14px Arial';
+        const textWidth = context.measureText(value).width;
+        return `${textWidth}px`;
     };
 
     return (
