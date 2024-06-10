@@ -1,7 +1,8 @@
 import './App.css';
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 
 function App() {
+    const newInputRef = useRef(null);
     const [inputs, setInputs] = useState([
         { name: 'afc', value: 0, solved: false, custom: false},
         { name: 'tfc', value: 0, solved: false, custom: false },
@@ -24,11 +25,23 @@ function App() {
             setInputs(newInputs);
         } 
     };
-        const handleAddVariable = () => {
-        setInputs(prevInputs => [
-            ...prevInputs,
-            { name: '', value: 0, solved: false }
-        ]);
+    const handleAddVariable = () => {
+        // setInputs(prevInputs => [
+        //     ...prevInputs,
+        //     { name: '', value: 0, solved: false }
+        // ]);
+        setInputs(prevInputs => {
+            const newInputs = [
+                ...prevInputs,
+                { name: '', value: 0, solved: false }
+            ];
+            return newInputs;
+        });
+        setTimeout(() => {
+            if (newInputRef.current) {
+                newInputRef.current.focus();
+            }
+        }, 0);
     };
 
     const calculateMinWidth = (value) => {
