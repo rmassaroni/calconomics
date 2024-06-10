@@ -1,5 +1,5 @@
 import './App.css';
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 
 function App() {
     const newInputRef = useRef(null);
@@ -8,6 +8,7 @@ function App() {
         { name: 'tfc', value: 0, solved: false, custom: false },
         { name: 'q', value: 0, solved: false, custom: false }
     ]);
+    const [newVariableName, setNewVariableName] = useState('');
     const handleInputChange = (index, value) => {
         const newInputs = [...inputs];
         newInputs[index].value = value;
@@ -26,14 +27,14 @@ function App() {
         } 
     };
     const handleAddVariable = () => {
-        // setInputs(prevInputs => [
-        //     ...prevInputs,
-        //     { name: '', value: 0, solved: false }
-        // ]);
+        if (newVariableName.trim() === '') {
+            alert('Please enter a name for the new variable.');
+            return;
+        }
         setInputs(prevInputs => {
             const newInputs = [
                 ...prevInputs,
-                { name: '', value: 0, solved: false }
+                { name: newVariableName, value: 0, solved: false }
             ];
             return newInputs;
         });
@@ -51,6 +52,12 @@ function App() {
         const textWidth = context.measureText(value).width;
         return `${textWidth}px`;
     };
+
+    useEffect(() => {
+        if (newInputRef.current) {
+            newInputRef.current.focus();
+        }
+    }, [inputs]);
 
     return (
         <div className="App">
@@ -72,6 +79,13 @@ function App() {
                 ))}
                 <div className="VarBlock" style={{ height: "100%" }}>
                     <label>
+                                                <input
+                            type="text"
+                            value={newVariableName}
+                            onChange={(e) => setNewVariableName(e.target.value)}
+                            placeholder="Enter variable name"
+                            style={{ display: "inline-block", border: "1px solid #ccc", borderRadius: "20px", padding: "5px", marginBottom: "10px", minWidth: "100px" }}
+                        />
                         <button style={{ display: "inline-block", border: "1px solid #ccc", borderRadius: "20px", padding: "5px", marginBottom: "10px", width: "100%", minWidth: "100px", height: "100%" }} onClick={handleAddVariable}>Add</button>
                     </label>
                 </div>
