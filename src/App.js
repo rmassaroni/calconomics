@@ -10,6 +10,7 @@ function App() {
         { name: 'q', value: 0, solved: false, custom: false }
     ]);
     const [newVariableName, setNewVariableName] = useState('');
+    const [addingVariable, setAddingVariable] = useState(false);
     const handleInputChange = (index, value) => {
         const newInputs = [...inputs];
         newInputs[index].value = value;
@@ -32,6 +33,10 @@ function App() {
         //     alert('Please enter a name for the new variable.');
         //     return;
         // }
+        if (addingVariable) {
+            return;
+        }
+        setAddingVariable(true);
         setInputs(prevInputs => {
             const newInputs = [
                 ...prevInputs,
@@ -79,12 +84,13 @@ function App() {
                     ) : null
                 ))}
                 <div className="VarBlock" style={{ borderRadius: "50%" }}>
+                    {!addingVariable ? (
                         <AddButton onClick={handleAddVariable} newVariableName={newVariableName} setNewVariableName={setNewVariableName}/>
+                    ) : ( null )}
                 </div>
             </header>
             <div className="Solutions">
                 {inputs.map((input, index) => (
-
                     input.solved ? (
                     <div className="Line">
                         <label>

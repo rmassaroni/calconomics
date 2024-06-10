@@ -14,7 +14,7 @@ const AddButton = ({ onClick, newVariableName, setNewVariableName }) => {
 
             onClick={onClick}
         >
-            <div style={{ color: "white", fontSize: "24px" }}>+</div>
+            <div style={{ color: "white", fontSize: "48px" }}>+</div>
         </button>
     </label>
 }
