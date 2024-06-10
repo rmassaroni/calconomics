@@ -28,10 +28,10 @@ function App() {
         } 
     };
     const handleAddVariable = () => {
-        if (newVariableName.trim() === '') {
-            alert('Please enter a name for the new variable.');
-            return;
-        }
+        // if (newVariableName.trim() === '') {
+        //     alert('Please enter a name for the new variable.');
+        //     return;
+        // }
         setInputs(prevInputs => {
             const newInputs = [
                 ...prevInputs,
@@ -78,7 +78,7 @@ function App() {
                         </div>
                     ) : null
                 ))}
-                <div className="VarBlock" style={{ height: "100%" }}>
+                <div className="VarBlock" style={{ borderRadius: "50%" }}>
                         <AddButton onClick={handleAddVariable} newVariableName={newVariableName} setNewVariableName={setNewVariableName}/>
                 </div>
             </header>

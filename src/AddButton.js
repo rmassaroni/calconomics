@@ -1,6 +1,27 @@
 const AddButton = ({ onClick, newVariableName, setNewVariableName }) => {
     return <label>
-        <input
+        <button 
+            style={{
+                width: "60px",
+                height: "60px",
+                backgroundColor: "#00d800",
+                borderRadius: "50%",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                cursor: "pointer",
+            }}
+
+            onClick={onClick}
+        >
+            <div style={{ color: "white", fontSize: "24px" }}>+</div>
+        </button>
+    </label>
+}
+export default AddButton;
+
+
+{/*        <input
             type="text"
             value={newVariableName}
             onChange={(e) => setNewVariableName(e.target.value)}
@@ -14,14 +35,10 @@ const AddButton = ({ onClick, newVariableName, setNewVariableName }) => {
                 borderRadius: "20px",
                 padding: "5px",
                 marginBottom: "10px",
-                width: "100%",
                 minWidth: "100px",
-                height: "100%"
             }} 
             onClick={onClick}
         >
             Add
         </button>
-    </label>
-}
-export default AddButton;
+        */}
