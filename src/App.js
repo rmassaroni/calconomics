@@ -1,4 +1,5 @@
 import './App.css';
+import AddButton from './AddButton.js';
 import React, { useState, useRef, useEffect } from 'react';
 
 function App() {
@@ -78,19 +79,7 @@ function App() {
                     ) : null
                 ))}
                 <div className="VarBlock" style={{ height: "100%" }}>
-                    <label>
-                        <input
-                            type="text"
-                            value={newVariableName}
-                            onChange={(e) => setNewVariableName(e.target.value)}
-                            placeholder="Enter variable name"
-                            style={{ display: "block", border: "1px solid #ccc", borderRadius: "20px", padding: "5px", marginBottom: "10px", minWidth: "100px" }}
-                        />
-                        <button
-                            style={{ display: "inline-block", border: "1px solid #ccc", borderRadius: "20px", padding: "5px", marginBottom: "10px", width: "100%", minWidth: "100px", height: "100%" }} 
-                            onClick={handleAddVariable}
-                        >Add</button>
-                    </label>
+                        <AddButton onClick={handleAddVariable} newVariableName={newVariableName} setNewVariableName={setNewVariableName}/>
                 </div>
             </header>
             <div className="Solutions">
