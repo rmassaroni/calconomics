@@ -1,5 +1,6 @@
 import './App.css';
 import AddButton from './AddButton.js';
+import Block from './Block.js';
 import React, { useState, useRef, useEffect } from 'react';
 
 function App() {
@@ -37,18 +38,31 @@ function App() {
             return;
         }
         setAddingVariable(true);
-        setInputs(prevInputs => {
-            const newInputs = [
-                ...prevInputs,
-                { name: newVariableName, value: 0, solved: false }
-            ];
-            return newInputs;
-        });
-        setTimeout(() => {
-            if (newInputRef.current) {
-                newInputRef.current.focus();
+        // setInputs(prevInputs => {
+        //     const newInputs = [
+        //         ...prevInputs,
+        //         // { name: newVariableName, value: 0, solved: false }
+        //         { name: 'name', value: 0, solved: false }
+        //
+        //     ];
+        //     return newInputs;
+        // });
+        // setTimeout(() => {
+        //     if (newInputRef.current) {
+        //         newInputRef.current.focus();
+        //     }
+        // }, 0);
+    };
+
+    const handleCustomInputKeyPress = (e) => {
+        if (e.key === 'Enter') {
+            const index = inputs.findIndex(input => input.custom);
+            if (index !== -1) {
+                const newInputs = [...inputs];
+                newInputs[index].custom = false;
+                setInputs(newInputs);
             }
-        }, 0);
+        }
     };
 
     const calculateMinWidth = (value) => {
@@ -83,10 +97,23 @@ function App() {
                         </div>
                     ) : null
                 ))}
-                <div className="VarBlock" style={{ borderRadius: "50%" }}>
+                <div style={{ borderRadius: "50%" }}>
                     {!addingVariable ? (
                         <AddButton onClick={handleAddVariable} newVariableName={newVariableName} setNewVariableName={setNewVariableName}/>
-                    ) : ( null )}
+                    ) : (
+                            <label>
+                                <input
+                                    ref={newInputRef}
+                                    style={{ border: "1px solid #ccc", borderRadius: "20px", padding: "5px", marginBottom: "10px", minWidth: calculateMinWidth(newVariableName), display: "block"}}
+                                    value={newVariableName}
+                                    onChange={(e) => setNewVariableName(e.target.value)}
+                                    onKeyPress={handleCustomInputKeyPress}
+                                />
+                                <input style={{ border: "1px solid #ccc", borderRadius: "20px", padding: "5px", marginBottom: "10px", minWidth: calculateMinWidth(newVariableName) }}>
+                                </input>
+                            </label>
+
+                        )}
                 </div>
             </header>
             <div className="Solutions">
