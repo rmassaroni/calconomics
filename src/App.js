@@ -46,7 +46,7 @@ function App() {
                     !input.solved ? (
                         <div className="VarBlock" key={index}>
                             <label>
-                                <p2 style={{ display: "block" }}>{input.name.toUpperCase()}: </p2>
+                                <p2 style={{ display: "block" }}>{input.name.toUpperCase()}</p2>
                                 <input style={{ border: "1px solid #ccc", borderRadius: "20px", padding: "5px", marginBottom: "10px", minWidth: "100px" }}
                                     type="number"
                                     value={input.value}
