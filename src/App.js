@@ -5,6 +5,7 @@ import React, { useState, useRef, useEffect } from 'react';
 
 function App() {
     const newInputRef = useRef(null);
+    const newInputValueRef = useRef(null);
     const [inputs, setInputs] = useState([
         { name: 'afc', value: 0, solved: false, custom: false},
         { name: 'tfc', value: 0, solved: false, custom: false },
@@ -55,6 +56,7 @@ function App() {
     };
 
     const handleCustomInputKeyPress = (e) => {
+        console.log(e.key);
         if (e.key === 'Enter') {
             const index = inputs.findIndex(input => input.custom);
             if (index !== -1) {
@@ -62,6 +64,10 @@ function App() {
                 newInputs[index].custom = false;
                 setInputs(newInputs);
             }
+                if (newInputValueRef.current) {
+                    console.log(true);
+                    newInputValueRef.current.focus();
+                }
         }
     };
 
@@ -114,7 +120,7 @@ function App() {
                                     >
                                         </input>
 
-                                <input style={{ border: "1px solid #ccc", borderRadius: "20px", padding: "5px", marginBottom: "10px" }}>
+                                <input ref={newInputValueRef} style={{ border: "1px solid #ccc", borderRadius: "20px", padding: "5px", marginBottom: "10px" }}>
                                 </input>
                             </label>
                         </div>
