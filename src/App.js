@@ -97,14 +97,16 @@ function App() {
                         </div>
                     ) : null
                 ))}
-                <div style={{ borderRadius: "50%" }}>
-                    {!addingVariable ? (
+                {!addingVariable ? (
+                    <div style={{ borderRadius: "50%" }}>
                         <AddButton onClick={handleAddVariable} newVariableName={newVariableName} setNewVariableName={setNewVariableName}/>
-                    ) : (
+                    </div>
+                ) : (
+                        <div className="VarBlock">
                             <label>
                                 <input
                                     ref={newInputRef}
-                                    style={{ border: "1px solid #ccc", borderRadius: "20px", padding: "5px", marginBottom: "10px", minWidth: calculateMinWidth(newVariableName), display: "block"}}
+                                    style={{ backgroundColor: "#282c34", border: "1px solid #ccc", borderRadius: "20px", padding: "5px", marginBottom: "10px", minWidth: calculateMinWidth(newVariableName), display: "block"}}
                                     value={newVariableName}
                                     onChange={(e) => setNewVariableName(e.target.value)}
                                     onKeyPress={handleCustomInputKeyPress}
@@ -112,9 +114,8 @@ function App() {
                                 <input style={{ border: "1px solid #ccc", borderRadius: "20px", padding: "5px", marginBottom: "10px", minWidth: calculateMinWidth(newVariableName) }}>
                                 </input>
                             </label>
-
-                        )}
-                </div>
+                        </div>
+                    )}
             </header>
             <div className="Solutions">
                 {inputs.map((input, index) => (
