@@ -23,7 +23,7 @@ function App() {
             const tfcValue = parseFloat(newInputs.find(input => input.name === 'tfc').value);
             const qValue = parseFloat(newInputs.find(input => input.name === 'q').value);
 
-            if (!isNaN(tfcValue) && !isNaN(qValue) && qValue !== 0) {
+            if (!isNaN(tfcValue) && !isNaN(qValue) && qValue !== 0 && tfcValue !== 0) {
                 newInputs.find(input => input.name === 'afc').solved = true;
             } else {
                 newInputs.find(input => input.name === 'afc').solved = false;
@@ -139,9 +139,9 @@ function App() {
             <div className="Solutions">
                 {inputs.map((input, index) => (
                     input.solved ? (
-                    <div className="Line">
+                    <div className="VarBlock" style={{ borderColor: "green" }}>
                         <label>
-                            <p2 style={{ display: "block" }}>AFC</p2>
+                            <div style={{ display: "block" }}>AFC</div>
                             <input
                                 style={{ border: "1px solid #ccc", borderRadius: "20px", padding: "5px", marginBottom: "10px" }}
                                 type="number"
