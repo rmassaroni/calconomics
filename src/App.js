@@ -74,10 +74,10 @@ function App() {
     };
 
     useEffect(() => {
-        if (newInputRef.current) {
+        if (addingVariable && newInputRef.current) {
             newInputRef.current.focus();
         }
-    }, [inputs]);
+    }, [addingVariable]);
 
     return (
         <div className="App">
