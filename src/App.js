@@ -81,12 +81,12 @@ function App() {
 
     return (
         <div className="App">
-            <header className="App-header">
+            <header className="App-header" style={{ overflow: "hidden"}}>
                 {inputs.map((input, index) => (
                     !input.solved ? (
                         <div className="VarBlock" key={index}>
                             <label>
-                                <p2 style={{ display: "block" }}>{input.name.toUpperCase()}</p2>
+                                <div style={{ display: "block" }}>{input.name.toUpperCase()}</div>
                                 <input style={{ border: "1px solid #ccc", borderRadius: "20px", padding: "5px", marginBottom: "10px", minWidth: "100px" }}
                                     type="number"
                                     value={input.value}
@@ -102,16 +102,19 @@ function App() {
                         <AddButton onClick={handleAddVariable} newVariableName={newVariableName} setNewVariableName={setNewVariableName}/>
                     </div>
                 ) : (
-                        <div className="VarBlock">
-                            <label>
-                                <input
-                                    ref={newInputRef}
-                                    style={{ backgroundColor: "#282c34", border: "1px solid #ccc", borderRadius: "20px", padding: "5px", marginBottom: "10px", minWidth: calculateMinWidth(newVariableName), display: "block"}}
-                                    value={newVariableName}
-                                    onChange={(e) => setNewVariableName(e.target.value)}
-                                    onKeyPress={handleCustomInputKeyPress}
-                                />
-                                <input style={{ border: "1px solid #ccc", borderRadius: "20px", padding: "5px", marginBottom: "10px", minWidth: calculateMinWidth(newVariableName) }}>
+                        <div className="VarBlock" style={{ overflow: "hidden" }}>
+                            <label style={{ width: "-webkit-fill-available" }}>
+                                    <input
+                                        ref={newInputRef}
+                                        style={{ width: "-webkit-fill-available", display: "block", backgroundColor: "#282c34", border: "1px solid #ccc", borderRadius: "20px", paddingLeft: "5px", display: "block", fontSize: "calc(10px + 2vmin)", textAlign: "center", color: "white"}}
+                                        placeholder="new"
+                                        value={newVariableName}
+                                        onChange={(e) => setNewVariableName(e.target.value)}
+                                        onKeyPress={handleCustomInputKeyPress}
+                                    >
+                                        </input>
+
+                                <input style={{ border: "1px solid #ccc", borderRadius: "20px", padding: "5px", marginBottom: "10px" }}>
                                 </input>
                             </label>
                         </div>

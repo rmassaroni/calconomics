@@ -15,12 +15,14 @@
 
 .App-header {
   background-color: #282c34;
-  max-height: 20vh;
+  max-height: 15vh;
   display: flex;
   align-items: center;
   justify-content: left;
   font-size: calc(10px + 2vmin);
   color: white;
+  height: 8vh;
+  padding: 10px;
 }
 
 .App-link {
@@ -54,4 +56,8 @@
     align-items: center;
     border-radius: 15px;
     border: 1px solid lightgray;
+    max-width: 190px;
+    width: 190px;
+    justify-content: center;
+    height: -webkit-fill-available;
 }
