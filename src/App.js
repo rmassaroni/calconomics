@@ -12,6 +12,7 @@ function App() {
         { name: 'q', value: 0, solved: false, custom: false }
     ]);
     const [newVariableName, setNewVariableName] = useState('');
+    const [newVariableValue, setNewVariableValue] = useState(0);
     const [addingVariable, setAddingVariable] = useState(false);
     const handleInputChange = (index, value) => {
         const newInputs = [...inputs];
@@ -56,18 +57,27 @@ function App() {
     };
 
     const handleCustomInputKeyPress = (e) => {
-        console.log(e.key);
         if (e.key === 'Enter') {
             const index = inputs.findIndex(input => input.custom);
             if (index !== -1) {
                 const newInputs = [...inputs];
-                newInputs[index].custom = false;
+                //newInputs[index].custom = false;
                 setInputs(newInputs);
             }
-                if (newInputValueRef.current) {
-                    console.log(true);
-                    newInputValueRef.current.focus();
-                }
+            // if (newInputValueRef.current) {
+            //     newInputValueRef.current.focus();
+            // }
+            if (addingVariable) {
+                setInputs(prevInputs => {
+                    const newInputs = [
+                        ...prevInputs,
+                        { name: newVariableName, value: 0, solved: false, custom: true}
+                    ];
+                    return newInputs;
+                });
+                setNewVariableName('');
+                setAddingVariable(false);
+            }
         }
     };
 
@@ -92,7 +102,7 @@ function App() {
                     !input.solved ? (
                         <div className="VarBlock" key={index}>
                             <label>
-                                <div style={{ display: "block" }}>{input.name.toUpperCase()}</div>
+                                <div style={{ display: "block", color: input.custom ? "yellow" : "white" }}>{input.name.toUpperCase()}</div>
                                 <input style={{ border: "1px solid #ccc", borderRadius: "20px", padding: "5px", marginBottom: "10px", minWidth: "100px" }}
                                     type="number"
                                     value={input.value}
@@ -120,7 +130,7 @@ function App() {
                                     >
                                         </input>
 
-                                <input ref={newInputValueRef} style={{ border: "1px solid #ccc", borderRadius: "20px", padding: "5px", marginBottom: "10px" }}>
+                                <input ref={newInputValueRef} style={{ border: "1px solid #ccc", borderRadius: "20px", padding: "5px", marginBottom: "10px" }} value={0} onChange={(e) => setNewVariableValue(e.target.value)}>
                                 </input>
                             </label>
                         </div>
