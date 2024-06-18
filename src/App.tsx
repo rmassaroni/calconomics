@@ -76,6 +76,9 @@ const App: React.FC = () => {
     const calculateMinWidth = (value: string): string => {
         const canvas = document.createElement('canvas');
         const context = canvas.getContext('2d');
+        if (!context) {
+            throw new Error('Failed to get 2D context for canvas');
+        }
         context.font = '14px Arial';
         const textWidth = context.measureText(value).width;
         return `${textWidth}px`;
@@ -115,7 +118,7 @@ const App: React.FC = () => {
                         <label style={{ width: "-webkit-fill-available" }}>
                             <input
                                 ref={newInputRef}
-                                style={{ width: "-webkit-fill-available", display: "block", backgroundColor: "#282c34", border: "1px solid #ccc", borderRadius: "20px", paddingLeft: "5px", display: "block", fontSize: "calc(10px + 2vmin)", textAlign: "center", color: "white" }}
+                                style={{ width: "-webkit-fill-available", display: "block", backgroundColor: "#282c34", border: "1px solid #ccc", borderRadius: "20px", paddingLeft: "5px", fontSize: "calc(10px + 2vmin)", textAlign: "center", color: "white" }}
                                 placeholder="new"
                                 value={newVariableName}
                                 onChange={(e: ChangeEvent<HTMLInputElement>) => setNewVariableName(e.target.value)}
@@ -140,3 +143,18 @@ const App: React.FC = () => {
                                 <div style={{ display: "block" }}>AFC</div>
                                 <input
                                     style={{ border: "1px solid #ccc", borderRadius: "20px", padding: "5px", marginBottom: "10px" }}
+                                    type="number"
+                                    value={(parseFloat(inputs.find(input => input.name === 'tfc')?.value.toString() || '0') / parseFloat(inputs.find(input => input.name === 'q')?.value.toString() || '0')).toFixed(2)}
+                                    readOnly
+                                />
+                            </label>
+                            <br />
+                        </div>
+                    ) : null
+                ))}
+            </div>
+        </div>
+    );
+}
+
+export default App;
