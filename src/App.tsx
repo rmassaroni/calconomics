@@ -1,12 +1,12 @@
 import './App.css';
 import AddButton from './AddButton';
 import React, { useState, useRef, useEffect, ChangeEvent, KeyboardEvent } from 'react';
-import { Input } from './types';
+import { Variable } from './types';
 
 const App: React.FC = () => {
-    const newInputRef = useRef<HTMLInputElement>(null);
-    const newInputValueRef = useRef<HTMLInputElement>(null);
-    const [inputs, setInputs] = useState<Input[]>([
+    const newVarRef = useRef<HTMLInputElement>(null);
+    const newVarValueRef = useRef<HTMLInputElement>(null);
+    const [vars, setVars] = useState<Variable[]>([
         { name: 'afc', value: 0, solved: false, custom: false },
         { name: 'tfc', value: 0, solved: false, custom: false },
         { name: 'q', value: 0, solved: false, custom: false }
@@ -16,26 +16,26 @@ const App: React.FC = () => {
     const [addingVariable, setAddingVariable] = useState<boolean>(false);
 
     const handleInputChange = (index: number, value: number) => {
-        const newInputs = [...inputs];
-        newInputs[index].value = value;
-        setInputs(newInputs);
+        const newVars = [...vars];
+        newVars[index].value = value;
+        setVars(newVars);
 
-        if (newInputs[index].name === 'tfc' || newInputs[index].name === 'q') {
-            const tfcValue = parseFloat(newInputs.find(input => input.name === 'tfc')?.value.toString() || '0');
-            const qValue = parseFloat(newInputs.find(input => input.name === 'q')?.value.toString() || '0');
+        if (newVars[index].name === 'tfc' || newVars[index].name === 'q') {
+            const tfcValue = parseFloat(newVars.find(input => input.name === 'tfc')?.value.toString() || '0');
+            const qValue = parseFloat(newVars.find(input => input.name === 'q')?.value.toString() || '0');
 
             if (!isNaN(tfcValue) && !isNaN(qValue) && qValue !== 0 && tfcValue !== 0) {
-                const afcInput = newInputs.find(input => input.name === 'afc');
+                const afcInput = newVars.find(input => input.name === 'afc');
                 if (afcInput) {
                     afcInput.solved = true;
                 }
             } else {
-                const afcInput = newInputs.find(input => input.name === 'afc');
+                const afcInput = newVars.find(input => input.name === 'afc');
                 if (afcInput) {
                     afcInput.solved = false;
                 }
             }
-            setInputs(newInputs);
+            setVars(newVars);
         }
     };
 
@@ -48,18 +48,18 @@ const App: React.FC = () => {
 
     const handleCustomInputKeyPress = (e: KeyboardEvent<HTMLInputElement>) => {
         if (e.key === 'Enter') {
-            const index = inputs.findIndex(input => input.custom);
+            const index = vars.findIndex(input => input.custom);
             if (index !== -1) {
-                const newInputs = [...inputs];
-                setInputs(newInputs);
+                const newVars = [...vars];
+                setVars(newVars);
             }
             if (addingVariable) {
-                setInputs(prevInputs => {
-                    const newInputs = [
+                setVars(prevInputs => {
+                    const newVars = [
                         ...prevInputs,
                         { name: newVariableName, value: 0, solved: false, custom: true }
                     ];
-                    return newInputs;
+                    return newVars;
                 });
                 setNewVariableName('');
                 setAddingVariable(false);
@@ -68,15 +68,15 @@ const App: React.FC = () => {
     };
 
     useEffect(() => {
-        if (addingVariable && newInputRef.current) {
-            newInputRef.current.focus();
+        if (addingVariable && newVarRef.current) {
+            newVarRef.current.focus();
         }
     }, [addingVariable]);
 
     return (
         <div className="App">
             <header className="App-header" style={{ overflow: "hidden" }}>
-                {inputs.map((input, index) => (
+                {vars.map((input, index) => (
                     !input.solved ? (
                         <div className="VarBlock" key={index}>
                             <label>
@@ -100,7 +100,7 @@ const App: React.FC = () => {
                     <div className="VarBlock" style={{ overflow: "hidden" }}>
                         <label style={{ width: "-webkit-fill-available" }}>
                             <input
-                                ref={newInputRef}
+                                ref={newVarRef}
                                 style={{ width: "-webkit-fill-available", display: "block", backgroundColor: "#282c34", border: "1px solid #ccc", borderRadius: "20px", paddingLeft: "5px", fontSize: "calc(10px + 2vmin)", textAlign: "center", color: "white" }}
                                 placeholder="new"
                                 value={newVariableName}
@@ -108,7 +108,7 @@ const App: React.FC = () => {
                                 onKeyPress={handleCustomInputKeyPress}
                             />
                             <input
-                                ref={newInputValueRef}
+                                ref={newVarValueRef}
                                 style={{ border: "1px solid #ccc", borderRadius: "20px", padding: "5px", marginBottom: "10px" }}
                                 type="number"
                                 value={newVariableValue}
@@ -119,7 +119,7 @@ const App: React.FC = () => {
                 )}
             </header>
             <div className="Solutions">
-                {inputs.map((input, index) => (
+                {vars.map((input, index) => (
                     input.solved ? (
                         <div className="VarBlock" key={index} style={{ borderColor: "green" }}>
                             <label>
@@ -127,7 +127,7 @@ const App: React.FC = () => {
                                 <input
                                     style={{ border: "1px solid #ccc", borderRadius: "20px", padding: "5px", marginBottom: "10px" }}
                                     type="number"
-                                    value={(parseFloat(inputs.find(input => input.name === 'tfc')?.value.toString() || '0') / parseFloat(inputs.find(input => input.name === 'q')?.value.toString() || '0')).toFixed(2)}
+                                    value={(parseFloat(vars.find(input => input.name === 'tfc')?.value.toString() || '0') / parseFloat(vars.find(input => input.name === 'q')?.value.toString() || '0')).toFixed(2)}
                                     readOnly
                                 />
                             </label>
