@@ -16,7 +16,6 @@ const App: React.FC = () => {
                 custom: false
             });
         });
-
         return initialVars;
     });
     const [newVariableName, setNewVariableName] = useState<string>('');
