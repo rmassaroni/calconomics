@@ -5,3 +5,9 @@ export interface Variable {
   custom: boolean;
 }
 
+export enum DefaultVariables {
+    AFC = 'afc',
+    TFC = 'tfc',
+    Q = 'q'
+}
+

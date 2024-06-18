@@ -1,16 +1,24 @@
 import './App.css';
 import AddButton from './AddButton';
 import React, { useState, useRef, useEffect, ChangeEvent, KeyboardEvent } from 'react';
-import { Variable } from './types';
+import { Variable, DefaultVariables } from './types';
 
 const App: React.FC = () => {
     const newVarRef = useRef<HTMLInputElement>(null);
     const newVarValueRef = useRef<HTMLInputElement>(null);
-    const [vars, setVars] = useState<Variable[]>([
-        { name: 'afc', value: 0, solved: false, custom: false },
-        { name: 'tfc', value: 0, solved: false, custom: false },
-        { name: 'q', value: 0, solved: false, custom: false }
-    ]);
+    const [vars, setVars] = useState<Variable[]>(() => { //adds defaults to vars
+        const initialVars: Variable[] = [];
+        Object.keys(DefaultVariables).forEach((key) => {
+            initialVars.push({
+                name: DefaultVariables[key as keyof typeof DefaultVariables],
+                value: 0,
+                solved: false,
+                custom: false
+            });
+        });
+
+        return initialVars;
+    });
     const [newVariableName, setNewVariableName] = useState<string>('');
     const [newVariableValue, setNewVariableValue] = useState<number>(0);
     const [addingVariable, setAddingVariable] = useState<boolean>(false);
