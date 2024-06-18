@@ -1,6 +1,5 @@
 import './App.css';
 import AddButton from './AddButton.js';
-import Block from './Block.js';
 import React, { useState, useRef, useEffect } from 'react';
 
 function App() {
