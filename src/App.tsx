@@ -1,13 +1,7 @@
 import './App.css';
 import AddButton from './AddButton';
 import React, { useState, useRef, useEffect, ChangeEvent, KeyboardEvent } from 'react';
-
-interface Input {
-    name: string;
-    value: number;
-    solved: boolean;
-    custom: boolean;
-}
+import { Input } from './types';
 
 const App: React.FC = () => {
     const newInputRef = useRef<HTMLInputElement>(null);
@@ -71,17 +65,6 @@ const App: React.FC = () => {
                 setAddingVariable(false);
             }
         }
-    };
-
-    const calculateMinWidth = (value: string): string => {
-        const canvas = document.createElement('canvas');
-        const context = canvas.getContext('2d');
-        if (!context) {
-            throw new Error('Failed to get 2D context for canvas');
-        }
-        context.font = '14px Arial';
-        const textWidth = context.measureText(value).width;
-        return `${textWidth}px`;
     };
 
     useEffect(() => {
