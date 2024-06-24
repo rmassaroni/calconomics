@@ -11,3 +11,8 @@ export enum DefaultVariables {
     Q = 'q'
 }
 
+export enum FinancialStatements {
+    IncomeStatement = 'income-statement',
+    BalanceSheet = 'balance-sheet',
+    CashFlowStatement = 'cash-flow-statement'
+}
